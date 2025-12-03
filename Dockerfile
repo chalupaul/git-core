@@ -3,7 +3,8 @@
 FROM public.ecr.aws/amazonlinux/amazonlinux:minimal AS linux
 # we want latest here
 # hadolint ignore=DL3041
-RUN dnf install -y \
+RUN dnf upgrade --refresh -y && \
+    dnf install -y \
     autoconf \
     automake \
     binutils \
