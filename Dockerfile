@@ -1,13 +1,13 @@
 # syntax=docker/dockerfile:1.19.0
 
 FROM public.ecr.aws/amazonlinux/amazonlinux:minimal as linux
+# we want latest here
+# hadolint ignore=DL3041
 RUN dnf install -y \
     autoconf \
     automake \
     binutils \
     curl-devel \
- #   expat \
- #   expat-devel \
     gcc \
     gettext \
     gettext-devel \
@@ -33,10 +33,13 @@ RUN dnf install -y \
     tcl-devel \
     wget \
     zlib-static \
-    zlib-devel
+    zlib-devel && \
+    dnf clean all
 
-RUN wget https://www.kernel.org/pub/software/scm/git/git-2.51.2.tar.gz && \
-    tar xzf /git-2.51.2.tar.gz
+ARG GIT_VERSION = "2.52.0"
+
+RUN wget -q https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz && \
+    tar xzf /git-$GIT_VERSION.tar.gz
 #    wget http://musl.cc/x86_64-linux-musl-cross.tgz && \
 #    tar xzf /x86_64-linux-musl-cross.tgz
 
@@ -45,8 +48,9 @@ ENV PATH="$PATH:/git-core/bin"
 #ENV CFLAGS="$CFLAGS -static"
 
 # --build x86_64-linux-musl-cross
+WORKDIR /git-$GIT_VERSION
+
 RUN mkdir /git-core && \
-    cd /git-2.51.2 && \
     ./configure --prefix="/git-core" --with-curl --with-openssl --without-expat && \
     make -j8 install
 
