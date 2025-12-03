@@ -36,7 +36,7 @@ RUN dnf install -y \
     zlib-devel && \
     dnf clean all
 
-ARG GIT_VERSION = "2.52.0"
+ARG GIT_VERSION="2.52.0"
 
 RUN wget -q https://www.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz && \
     tar xzf /git-$GIT_VERSION.tar.gz
