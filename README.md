@@ -2,7 +2,7 @@
 A docker container that builds git into a single /git-core directory. Useful for CICD
 
 ### Git Kinda Sucks
-![ye olde fashioned xkcd Dependency image (https://xkcd.com/2347)](https://raw.githubusercontent.com/chalupaul/git_only_docker/refs/heads/main/assets/xkcdgit.jpg)
+![ye olde fashioned xkcd Dependency image (https://xkcd.com/2347)]https://github.com/chalupaul/git-core/blob/main/assets/kxcdgit.jpg?raw=true)
 
 It may be the best source control system we've imagined so far, but its history as a patchwork set of bash and perl scripts really shows. 
 
